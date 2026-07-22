@@ -1,8 +1,34 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { renderRich } from "@/lib/richText";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 15,
+    },
+  },
+};
 
 const AboutSection = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -10,26 +36,23 @@ const AboutSection = () => {
     <section id="about" className="apple-section" ref={ref}>
       <div className="apple-container">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "show" : "hidden"}
           className="max-w-3xl mx-auto text-center"
         >
-          <p className="apple-link mb-4 uppercase tracking-widest text-xs">Sobre mim</p>
-          <h2 className="apple-heading mb-8">
-            Construindo o futuro,<br />uma API por vez.
-          </h2>
-          <p className="apple-body mb-6">
-            Sou um desenvolvedor back-end apaixonado por criar sistemas robustos e escaláveis.
-            Meu foco principal está em <strong className="text-foreground">Java</strong> e{" "}
-            <strong className="text-foreground">Spring Boot</strong>, mas possuo experiência
-            com múltiplas tecnologias tanto no backend quanto no frontend.
-          </p>
-          <p className="apple-body">
-            Acredito na construção de APIs RESTful bem documentadas, arquiteturas limpas e
-            código que resiste ao tempo. Busco constantemente aprimorar minhas habilidades
-            em arquitetura de sistemas, boas práticas e novas tecnologias.
-          </p>
+          <motion.p variants={itemVariants} className="apple-link mb-4 uppercase tracking-widest text-xs">
+            {t.about.label}
+          </motion.p>
+          <motion.h2 variants={itemVariants} className="apple-heading mb-8 bg-clip-text text-transparent bg-gradient-to-b from-foreground via-foreground to-foreground/80 font-bold">
+            {t.about.headingLine1}<br />{t.about.headingLine2}
+          </motion.h2>
+          <motion.p variants={itemVariants} className="apple-body mb-6 leading-relaxed">
+            {renderRich(t.about.paragraph1, "text-foreground font-semibold")}
+          </motion.p>
+          <motion.p variants={itemVariants} className="apple-body leading-relaxed">
+            {t.about.paragraph2}
+          </motion.p>
         </motion.div>
       </div>
     </section>

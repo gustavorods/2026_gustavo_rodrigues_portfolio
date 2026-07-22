@@ -1,77 +1,82 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import SpotlightCard from "./ui/spotlight-card";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-interface SkillCategory {
-  title: string;
-  skills: string[];
-}
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
 
-const categories: SkillCategory[] = [
-  {
-    title: "Backend",
-    skills: ["Java", "Spring Boot", "Node.js", "PHP", "Laravel", "Python", "Kotlin", "C++"],
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 15,
+    },
   },
-  {
-    title: "Frontend",
-    skills: ["Angular", "React", "JavaScript", "TypeScript", "HTML", "CSS"],
-  },
-  {
-    title: "Testes",
-    skills: ["Jest", "JUnit"],
-  },
-  {
-    title: "Banco de Dados",
-    skills: ["MySQL", "MariaDB", "Firebase"],
-  },
-  {
-    title: "DevOps & Cloud",
-    skills: ["Docker", "Vercel", "Aiven"],
-  },
-];
+};
 
 const SkillsSection = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="skills" className="apple-section bg-secondary/30" ref={ref}>
+    <section id="skills" className="apple-section bg-secondary/20" ref={ref}>
       <div className="apple-container">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <p className="apple-link mb-4 uppercase tracking-widest text-xs">Habilidades</p>
-          <h2 className="apple-heading">Tecnologias que domino.</h2>
+          <p className="apple-link mb-4 uppercase tracking-widest text-xs">{t.skills.label}</p>
+          <h2 className="apple-heading">{t.skills.heading}</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((cat, catIdx) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "show" : "hidden"}
+          className="flex flex-wrap justify-center gap-8"
+        >
+          {t.skills.categories.map((cat) => (
             <motion.div
               key={cat.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: catIdx * 0.1,
-                ease: [0.25, 0.1, 0, 1],
-              }}
-              className="apple-card"
+              variants={itemVariants}
+              className="flex w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]"
             >
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-5">
-                {cat.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span key={skill} className="apple-badge">
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              <SpotlightCard className="flex flex-col h-full w-full !p-6 md:!p-8">
+                <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-6 pb-2 border-b border-border/40">
+                  {cat.title}
+                </h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {cat.skills.map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 12 }}
+                      className="apple-badge cursor-default select-none bg-secondary/80 hover:bg-sky-500/10 hover:text-sky-500 dark:hover:text-sky-400 font-medium transition-colors duration-300"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </SpotlightCard>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
