@@ -26,7 +26,7 @@ const en: Translations = {
     ],
     role: "Back-End Developer",
     description:
-      "Developer specialized in building robust APIs, scalable systems, and high-performance backend architectures with Java and Spring Boot.",
+      "Developer specialized in building robust APIs, scalable systems, and high-performance backend architectures with Java, Spring Boot, and AWS.",
     ctaProjects: "View Projects",
     ctaContact: "Contact",
   },
@@ -35,19 +35,19 @@ const en: Translations = {
     headingLine1: "Building the future,",
     headingLine2: "one API at a time.",
     paragraph1:
-      "I'm a back-end developer passionate about building robust, scalable systems. My main focus is on **Java** and **Spring Boot**, but I also have experience with multiple technologies in both backend and frontend.",
+      "I'm a back-end developer pursuing a bachelor's degree in Systems Analysis and Development, with **advanced English** and experience building scalable web applications with **Java**, **Spring Boot**, and **Python**, as well as working with **Angular** and **React**.",
     paragraph2:
-      "I believe in building well-documented RESTful APIs, clean architectures, and code that stands the test of time. I'm constantly working to improve my skills in system architecture, best practices, and new technologies.",
+      "My experience includes building **RESTful APIs**, integrating interfaces with dynamic data loading, implementing **unit and integration tests**, and automating **CI/CD pipelines with GitHub Actions**. I focus on best practices, performance, and maintainability to build efficient, scalable solutions for real-world problems in dynamic environments.",
   },
   skills: {
     label: "Skills",
     heading: "Technologies I work with.",
     categories: [
-      { title: "Backend", skills: ["Java", "Spring Boot", "Node.js", "PHP", "Laravel", "Python", "Kotlin", "C++"] },
+      { title: "Backend", skills: ["Java", "Spring Boot", "Quarkus", "REST API", "GraphQL", "Node.js", "PHP", "Laravel", "Python", "Kotlin", "C++"] },
       { title: "Frontend", skills: ["Angular", "React", "JavaScript", "TypeScript", "HTML", "CSS"] },
       { title: "Testing", skills: ["Jest", "JUnit", "Pytest"] },
-      { title: "Databases", skills: ["MySQL", "MariaDB", "Firebase", "Redis"] },
-      { title: "DevOps & Cloud", skills: ["Docker", "Vercel", "Aiven", "AWS S3", "AWS SQS"] },
+      { title: "Databases", skills: ["PostgreSQL", "MySQL", "MariaDB", "Firebase", "Redis"] },
+      { title: "DevOps & Cloud", skills: ["Docker", "Vercel", "Aiven", "AWS S3", "AWS SQS", "AWS EC2", "GitHub Actions"] },
     ],
   },
   projects: {
@@ -72,12 +72,58 @@ const en: Translations = {
           { name: "Swagger", detail: "Interactive OpenAPI docs generated automatically from the routes' Zod schemas, served at /docs." },
         ],
         responsibilities: [
-          "Cut costly database queries by building a real-time ranking with Redis **Sorted Sets**.",
-          "Prevented duplicate sign-ups by checking the e-mail in PostgreSQL via **Drizzle ORM** before every insert.",
-          "Auto-documented **100%** of the endpoints by wiring **Zod** schemas into Fastify to generate the OpenAPI spec.",
-          "Standardized the local environment, orchestrating PostgreSQL and Redis with **Docker Compose** and **Drizzle Kit** migrations.",
+          "Optimized ranking retrieval, eliminating costly SQL aggregations on every request, with real-time scoring via Redis **Sorted Sets**.",
+          "Prevented duplicate sign-ups in the referral campaign, ensuring idempotency when the same link is reused, with a unique e-mail constraint validated via **Drizzle ORM**.",
+          "Automated documentation for all **6 API routes**, wiring **Zod** schemas into Fastify to generate the OpenAPI spec served at /docs.",
+          "Instrumented the event's viral growth funnel, exposing per-subscriber click, referral, and ranking metrics by combining **Redis** Hash and Sorted Set structures.",
         ],
         githubUrl: "https://github.com/gustavorods/2025_creating_an_event_registration_api_with_referral_link_using_node_and_typescript",
+      },
+      {
+        title: "ESTOK — Real-Time RFID Inventory Control",
+        description:
+          "Shelf inventory control application using RFID, built to be scalable and easy to maintain. Performs near real-time monitoring via ESP32 and WebSocket, helping tackle a $32 billion problem in retail shrinkage.",
+        stacks: [
+          { name: "Node.js", detail: "Server runtime behind the inventory control API's business logic." },
+          { name: "Express", detail: "HTTP framework used to structure over 15 REST endpoints in an MVC architecture." },
+          { name: "MySQL", detail: "Relational database storing products, shelves and stock movements." },
+          { name: "WebSocket", detail: "Real-time communication between the ESP32/RFID modules and the dashboard." },
+          { name: "JWT", detail: "User authentication, protecting the application's private routes." },
+          { name: "bcrypt", detail: "Password hashing before storing user credentials in the database." },
+          { name: "API Key", detail: "x-api-key header authentication for ESP32 devices communicating with the API." },
+          { name: "Jest", detail: "Automated testing framework validating the application's core flows." },
+          { name: "Supertest", detail: "Integration tests for the API's HTTP routes." },
+          { name: "Swagger", detail: "Interactive documentation for the application's REST endpoints." },
+        ],
+        responsibilities: [
+          "Built over **15 REST endpoints** with Node.js and Express, improving the RFID system's organization and integration through a layered architecture.",
+          "Cut dashboard update time by roughly **80%**, implementing real-time communication between ESP32 and the application via **WebSocket**.",
+          "Secured **100%** of the application's private routes, implementing **JWT** authentication and **bcrypt** password hashing.",
+          "Automated validation of the system's core flows, writing over **20 tests** with **Jest** and **Supertest**, increasing API reliability across new implementations.",
+        ],
+        githubUrl: "https://github.com/gustavorods/2025_estok_backend",
+      },
+      {
+        title: "CICD Lab API — Full CI/CD Pipeline with GitHub Actions",
+        description:
+          "Spring Boot API built to study and put into practice an end-to-end CI/CD pipeline: automated testing, artifact build, Docker image packaging, publishing to the GitHub Container Registry, and automatic deployment to Render on every push to the main branch.",
+        stacks: [
+          { name: "Java", detail: "Application language, on version 21 (LTS), running on the Eclipse Temurin JVM in production." },
+          { name: "Spring Boot", detail: "REST framework (Spring Boot 4 + spring-boot-starter-webmvc) powering the API and the /hello endpoint." },
+          { name: "Maven", detail: "Build and dependency manager, run via the wrapper (mvnw) both locally and in the GitHub Actions jobs." },
+          { name: "JUnit 5", detail: "Unit tests (e.g. HelloControllerTest) and integration tests (SpringBootTest + RestTestClient), executed in the pipeline's test stage." },
+          { name: "Docker", detail: "Packages the application into an image based on eclipse-temurin:21-jre, copying the pre-built .jar and exposing port 8080." },
+          { name: "GitHub Actions", detail: "Orchestrates the pipeline across 3 chained jobs (test → build → docker), triggered automatically on push/pull request to main." },
+          { name: "GHCR", detail: "GitHub Container Registry used to publish the Docker image (ghcr.io/<owner>/cicd-lab-api:latest) generated by the docker job." },
+          { name: "Render", detail: "Deployment platform configured to pull the image from GHCR, updated via a Deploy Hook triggered at the end of the pipeline." },
+        ],
+        responsibilities: [
+          "Built an end-to-end CI/CD pipeline with **GitHub Actions**, eliminating manual deploys by chaining 3 jobs (test → build → docker) triggered on every push to main.",
+          "Ensured only tested code reaches production, automatically blocking the build and deploy stages whenever unit or integration tests fail, via job-level needs dependencies.",
+          "Automated Docker image publishing, packaging the application with **Docker** (eclipse-temurin:21-jre) and pushing it to **GHCR** on every successful pipeline run.",
+          "Set up continuous deployment on **Render**, automatically triggering a Deploy Hook via curl at the end of the pipeline to update the production container with the latest GHCR image.",
+        ],
+        githubUrl: "https://github.com/gustavorods/2026_cicd_lab_api",
       },
     ],
   },
@@ -110,6 +156,15 @@ const en: Translations = {
     ],
     experience: [
       {
+        title: "Junior Full Stack Developer",
+        subtitle: "ACT Digital | BMW Group Americas Project",
+        period: "August 2026 — Present",
+        items: [
+          "Support legacy system documentation by analyzing applications built with **Java** and **Spring**, helping clarify and preserve technical knowledge.",
+          "Support the development and maintenance of **CI/CD** pipelines with **GitHub Actions**, helping automate and standardize integration and delivery processes.",
+        ],
+      },
+      {
         title: "Junior Back-End Developer",
         subtitle: "Edy Planejados, São Paulo",
         period: "June 2026 — Present",
@@ -139,11 +194,11 @@ const en: Translations = {
     label: "Free time",
     heading: "Beyond the code.",
     items: [
-      { label: "Games", description: "Currently hooked on Cyberpunk 2077" },
-      { label: "Music", description: "I love LoFi" },
-      { label: "Cooking", description: "I'm really good at making desserts" },
-      { label: "Pets", description: "I share my keyboard with 1 dog and 1 cat" },
-      { label: "Going out", description: "I love trying new restaurants" },
+      { label: "Games", description: "I enjoy exploring worlds and great stories in games. Right now, I'm immersed in Cyberpunk 2077." },
+      { label: "Music", description: "Lo-fi is my soundtrack for slowing down and enjoying moments of focus." },
+      { label: "Cooking", description: "Desserts are my specialty in the kitchen. I enjoy turning recipes into good moments." },
+      { label: "Pets", description: "A dog and a cat are part of my daily life and keep me company even while I code." },
+      { label: "Going out", description: "I enjoy trying new restaurants, exploring flavors, and finding places worth revisiting." },
     ],
   },
   contact: {

@@ -26,7 +26,7 @@ const pt: Translations = {
     ],
     role: "Desenvolvedor Back-End",
     description:
-      "Desenvolvedor especializado em construir APIs robustas, sistemas escaláveis e arquiteturas backend de alta performance com Java e Spring Boot.",
+      "Desenvolvedor especializado em construir APIs robustas, sistemas escaláveis e arquiteturas backend de alta performance com Java, Spring Boot e AWS.",
     ctaProjects: "Ver Projetos",
     ctaContact: "Contato",
   },
@@ -35,19 +35,19 @@ const pt: Translations = {
     headingLine1: "Construindo o futuro,",
     headingLine2: "uma API por vez.",
     paragraph1:
-      "Sou um desenvolvedor back-end apaixonado por criar sistemas robustos e escaláveis. Meu foco principal está em **Java** e **Spring Boot**, mas possuo experiência com múltiplas tecnologias tanto no backend quanto no frontend.",
+      "Sou desenvolvedor back-end, cursando bacharelado em Análise e Desenvolvimento de Sistemas, com **inglês avançado** e experiência no desenvolvimento de aplicações web escaláveis com **Java**, **Spring Boot** e **Python**, além de atuação com **Angular** e **React**.",
     paragraph2:
-      "Acredito na construção de APIs RESTful bem documentadas, arquiteturas limpas e código que resiste ao tempo. Busco constantemente aprimorar minhas habilidades em arquitetura de sistemas, boas práticas e novas tecnologias.",
+      "Tenho experiência na construção de **APIs RESTful**, na integração de interfaces com carregamento dinâmico de dados, na implementação de **testes unitários e de integração** e na automação de pipelines **CI/CD com GitHub Actions**. Meu foco está em boas práticas, performance e manutenção de sistemas, criando soluções eficientes e escaláveis para resolver problemas reais em ambientes dinâmicos.",
   },
   skills: {
     label: "Habilidades",
     heading: "Tecnologias que domino.",
     categories: [
-      { title: "Backend", skills: ["Java", "Spring Boot", "Node.js", "PHP", "Laravel", "Python", "Kotlin", "C++"] },
+      { title: "Backend", skills: ["Java", "Spring Boot", "Quarkus", "REST API", "GraphQL", "Node.js", "PHP", "Laravel", "Python", "Kotlin", "C++"] },
       { title: "Frontend", skills: ["Angular", "React", "JavaScript", "TypeScript", "HTML", "CSS"] },
       { title: "Testes", skills: ["Jest", "JUnit", "Pytest"] },
-      { title: "Banco de Dados", skills: ["MySQL", "MariaDB", "Firebase", "Redis"] },
-      { title: "DevOps & Cloud", skills: ["Docker", "Vercel", "Aiven", "AWS S3", "AWS SQS"] },
+      { title: "Banco de Dados", skills: ["PostgreSQL", "MySQL", "MariaDB", "Firebase", "Redis"] },
+      { title: "DevOps & Cloud", skills: ["Docker", "Vercel", "Aiven", "AWS S3", "AWS SQS", "AWS EC2", "GitHub Actions"] },
     ],
   },
   projects: {
@@ -72,12 +72,58 @@ const pt: Translations = {
           { name: "Swagger", detail: "Documentação interativa (OpenAPI) gerada automaticamente a partir dos schemas Zod das rotas, disponível em /docs." },
         ],
         responsibilities: [
-          "Reduzi consultas custosas ao banco, implementando ranking em tempo real com **Sorted Sets** do Redis.",
-          "Evitei inscrições duplicadas, validando o e-mail no PostgreSQL via **Drizzle ORM** antes de cada inserção.",
-          "Documentei **100%** dos endpoints automaticamente, integrando schemas **Zod** ao Fastify para gerar a spec OpenAPI.",
-          "Padronizei o ambiente local, orquestrando PostgreSQL e Redis com **Docker Compose** e migrations do **Drizzle Kit**.",
+          "Otimizei a apuração do ranking, eliminando agregações SQL custosas a cada acesso, com pontuação em tempo real via **Sorted Sets** do Redis.",
+          "Impedi cadastros duplicados na campanha de indicação, garantindo idempotência ao reenviar o mesmo link, com constraint de e-mail único validada via **Drizzle ORM**.",
+          "Automatizei a documentação das **6 rotas** da API, integrando schemas **Zod** ao Fastify para gerar a spec OpenAPI disponível em /docs.",
+          "Instrumentei o funil de crescimento viral do evento, expondo métricas de cliques, indicações e posição por assinante, combinando Hash e Sorted Set do **Redis**.",
         ],
         githubUrl: "https://github.com/gustavorods/2025_creating_an_event_registration_api_with_referral_link_using_node_and_typescript",
+      },
+      {
+        title: "ESTOK — Controle de Estoque com RFID em Tempo Real",
+        description:
+          "Aplicação de controle de produtos em prateleiras utilizando RFID, desenvolvida para ser escalável e de fácil manutenção. Realiza monitoramento em tempo quase real através de ESP32 e WebSocket, ajudando a reduzir um problema de 32 bilhões de reais em perdas no varejo.",
+        stacks: [
+          { name: "Node.js", detail: "Runtime do servidor, responsável pela lógica de negócio da API de controle de estoque." },
+          { name: "Express", detail: "Framework HTTP usado para estruturar mais de 15 endpoints REST em arquitetura MVC." },
+          { name: "MySQL", detail: "Banco de dados relacional para persistência dos produtos, prateleiras e movimentações de estoque." },
+          { name: "WebSocket", detail: "Comunicação em tempo real entre os módulos ESP32/RFID e o dashboard da aplicação." },
+          { name: "JWT", detail: "Autenticação dos usuários da aplicação, protegendo as rotas privadas do sistema." },
+          { name: "bcrypt", detail: "Criptografia das senhas dos usuários antes de armazená-las no banco." },
+          { name: "API Key", detail: "Autenticação via header x-api-key para a comunicação dos dispositivos ESP32 com a API." },
+          { name: "Jest", detail: "Framework de testes automatizados para validar os principais fluxos da aplicação." },
+          { name: "Supertest", detail: "Testes de integração das rotas HTTP da API." },
+          { name: "Swagger", detail: "Documentação interativa dos endpoints REST da aplicação." },
+        ],
+        responsibilities: [
+          "Desenvolvi mais de **15 endpoints REST** com Node.js e Express, melhorando a organização e integração do sistema RFID através de uma arquitetura em camadas.",
+          "Reduzi em cerca de **80%** o tempo de atualização do dashboard, implementando comunicação em tempo real entre ESP32 e aplicação via **WebSocket**.",
+          "Protegi **100%** das rotas privadas da aplicação, implementando autenticação com **JWT** e criptografia de senhas com **bcrypt**.",
+          "Automatizei a validação dos principais fluxos do sistema, criando mais de **20 testes** com **Jest** e **Supertest**, aumentando a confiabilidade da API em novas implementações.",
+        ],
+        githubUrl: "https://github.com/gustavorods/2025_estok_backend",
+      },
+      {
+        title: "CICD Lab API — Pipeline Completo de CI/CD com GitHub Actions",
+        description:
+          "API em Spring Boot construída para estudar e colocar em prática um pipeline de CI/CD ponta a ponta: testes automatizados, build do artefato, empacotamento em imagem Docker, publicação no GitHub Container Registry e deploy automático no Render a cada push na branch main.",
+        stacks: [
+          { name: "Java", detail: "Linguagem da aplicação, na versão 21 (LTS), rodando sobre a JVM do Eclipse Temurin em produção." },
+          { name: "Spring Boot", detail: "Framework REST (Spring Boot 4 + spring-boot-starter-webmvc) responsável pela API e pelo endpoint /hello." },
+          { name: "Maven", detail: "Gerenciador de build e dependências, executado via wrapper (mvnw) tanto localmente quanto nos jobs do GitHub Actions." },
+          { name: "JUnit 5", detail: "Testes unitários (ex.: HelloControllerTest) e de integração (SpringBootTest + RestTestClient), executados na etapa test do pipeline." },
+          { name: "Docker", detail: "Empacotamento da aplicação em imagem baseada em eclipse-temurin:21-jre, copiando o .jar já compilado e expondo a porta 8080." },
+          { name: "GitHub Actions", detail: "Orquestração do pipeline em 3 jobs encadeados (test → build → docker), disparado automaticamente em push/pull request para main." },
+          { name: "GHCR", detail: "GitHub Container Registry usado para publicar a imagem Docker (ghcr.io/<owner>/cicd-lab-api:latest) gerada pelo job docker." },
+          { name: "Render", detail: "Plataforma de deploy configurada para consumir a imagem do GHCR, atualizada via Deploy Hook disparado ao final do pipeline." },
+        ],
+        responsibilities: [
+          "Implementei um pipeline de CI/CD ponta a ponta com **GitHub Actions**, eliminando deploys manuais ao encadear 3 jobs (test → build → docker) disparados a cada push na branch main.",
+          "Garanti que só código testado chegue à produção, bloqueando automaticamente o build e o deploy sempre que os testes unitários ou de integração falham, através da dependência needs entre os jobs.",
+          "Automatizei a publicação de imagens Docker, empacotando a aplicação com **Docker** (eclipse-temurin:21-jre) e publicando no **GHCR** a cada execução bem-sucedida do pipeline.",
+          "Configurei o deploy contínuo no **Render**, disparando automaticamente um Deploy Hook via curl ao final do pipeline para atualizar o container em produção com a imagem mais recente do GHCR.",
+        ],
+        githubUrl: "https://github.com/gustavorods/2026_cicd_lab_api",
       },
     ],
   },
@@ -110,6 +156,15 @@ const pt: Translations = {
     ],
     experience: [
       {
+        title: "Full Stack Developer Júnior",
+        subtitle: "ACT Digital | Projeto BMW Group Americas",
+        period: "Agosto 2026 — Atual",
+        items: [
+          "Apoio a documentação de sistemas legados por meio da análise de aplicações desenvolvidas em **Java** e **Spring**, contribuindo para a clareza e a preservação do conhecimento técnico.",
+          "Apoio a construção e a manutenção de pipelines de **CI/CD** com **GitHub Actions**, contribuindo para a automação e a padronização dos processos de integração e entrega.",
+        ],
+      },
+      {
         title: "Desenvolvedor Back-End Júnior",
         subtitle: "Edy Planejados, São Paulo",
         period: "Junho 2026 — Presente",
@@ -139,11 +194,11 @@ const pt: Translations = {
     label: "Tempo livre",
     heading: "Além do código.",
     items: [
-      { label: "Games", description: "Atualmente estou viciado em Cyberpunk 2077" },
-      { label: "Música", description: "Curto muito LoFi" },
-      { label: "Cozinhar", description: "Sou muito bom em fazer doces" },
-      { label: "Animais", description: "Divido o teclado com 1 cachorro e 1 gato" },
-      { label: "Passear", description: "Adoro ir provar novos restaurantes" },
+      { label: "Games", description: "Gosto de explorar mundos e boas histórias nos games. Atualmente, estou mergulhado em Cyberpunk 2077." },
+      { label: "Música", description: "Lo-fi é minha trilha sonora para desacelerar e aproveitar os momentos de concentração." },
+      { label: "Cozinhar", description: "Na cozinha, minha especialidade são os doces. Gosto de transformar receitas em bons momentos." },
+      { label: "Animais", description: "Um cachorro e um gato fazem parte da minha rotina e me acompanham até na hora de programar." },
+      { label: "Passear", description: "Gosto de conhecer novos restaurantes, experimentar sabores e descobrir lugares para voltar." },
     ],
   },
   contact: {

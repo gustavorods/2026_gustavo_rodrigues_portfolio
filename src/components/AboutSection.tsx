@@ -51,7 +51,7 @@ const AboutSection = () => {
             {renderRich(t.about.paragraph1, "text-foreground font-semibold")}
           </motion.p>
           <motion.p variants={itemVariants} className="apple-body leading-relaxed">
-            {t.about.paragraph2}
+            {renderRich(t.about.paragraph2, "text-foreground font-semibold")}
           </motion.p>
         </motion.div>
       </div>

@@ -63,28 +63,31 @@ const HobbiesSection = () => {
                   <motion.div
                     variants={itemVariants}
                     whileHover="hover"
+                    tabIndex={0}
                     className="flex h-full w-full"
                   >
-                    <SpotlightCard className="flex flex-col items-center justify-center py-8 text-center h-full w-full !p-4 cursor-default select-none">
-                      <motion.div
-                        variants={{
-                          hover: {
-                            rotate: [0, -10, 10, -5, 5, 0],
-                            scale: 1.15,
-                            transition: { duration: 0.45, ease: "easeInOut" }
-                          }
-                        }}
-                        className="mb-3 text-muted-foreground group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors duration-300"
-                      >
-                        <hobby.icon size={28} />
-                      </motion.div>
-                      <span className="text-xs font-semibold tracking-wide text-foreground/80 group-hover:text-foreground transition-colors duration-300">
-                        {hobby.label}
-                      </span>
+                    <SpotlightCard className="text-center h-full w-full !p-4 cursor-default select-none">
+                      <div className="flex min-h-24 flex-1 flex-col items-center justify-center gap-3">
+                        <motion.div
+                          variants={{
+                            hover: {
+                              rotate: [0, -10, 10, -5, 5, 0],
+                              scale: 1.15,
+                              transition: { duration: 0.45, ease: "easeInOut" }
+                            }
+                          }}
+                          className="text-muted-foreground group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors duration-300"
+                        >
+                          <hobby.icon size={28} />
+                        </motion.div>
+                        <span className="text-xs font-semibold tracking-wide text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                          {hobby.label}
+                        </span>
+                      </div>
                     </SpotlightCard>
                   </motion.div>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent sideOffset={8} className="max-w-[min(18rem,calc(100vw-2rem))] text-center leading-relaxed">
                   <p>{hobby.description}</p>
                 </TooltipContent>
               </Tooltip>
